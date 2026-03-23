@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindReflectAI - Sentiment Predictor for Depression & Stress Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">&#9881;</span>
+                <span class="logo-text">MindReflectAI</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#assessment">Assessment</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Sentiment Predictor for Depression & Stress Detection</h1>
+            <p>Using Speech Analysis and Convolutional Neural Networks to understand your mental well-being</p>
+            <a href="#assessment" class="btn-primary">Start Assessment</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2>About MindReflectAI</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="card-icon">&#128221;</div>
+                    <h3>Questionnaire</h3>
+                    <p>PHQ-based screening questions to assess depression, anxiety, and stress levels.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-icon">&#127908;</div>
+                    <h3>Speech Analysis</h3>
+                    <p>MFCC extraction, pitch analysis, and speech rate detection from your voice.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-icon">&#128247;</div>
+                    <h3>Facial Analysis</h3>
+                    <p>Emotion variance, blink rate, and smile detection using computer vision.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-icon">&#128172;</div>
+                    <h3>Text Sentiment</h3>
+                    <p>Natural language processing to analyze the sentiment of your written thoughts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Assessment Section -->
+    <section id="assessment" class="assessment-section">
+        <div class="container">
+            <h2>Mental Health Assessment</h2>
+            <p class="section-subtitle">Please complete all sections below for a comprehensive analysis</p>
+
+            <form id="assessmentForm" enctype="multipart/form-data">
+                <!-- Step Indicator -->
+                <div class="step-indicator">
+                    <div class="step active" data-step="1">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Questionnaire</span>
+                    </div>
+                    <div class="step" data-step="2">
+                        <span class="step-number">2</span>
+                        <span class="step-label">How You Feel</span>
+                    </div>
+                    <div class="step" data-step="3">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Voice Sample</span>
+                    </div>
+                    <div class="step" data-step="4">
+                        <span class="step-number">4</span>
+                        <span class="step-label">Photo</span>
+                    </div>
+                </div>
+
+                <!-- Step 1: Questionnaire -->
+                <div class="form-step active" id="step1">
+                    <h3>Part 1: Screening Questionnaire</h3>
+                    <p class="step-description">Over the past two weeks, please rate each of the following:</p>
+
+                    <div class="question-group">
+                        <div class="question" id="question1">
+                            <p class="question-text"><strong>Q1.</strong> Over the past two weeks, how often have you felt little interest or pleasure in doing things you usually enjoy?</p>
+                            <div class="options">
+                                <label class="option"><input type="radio" name="q1" value="0" required><span class="radio-custom"></span> Not at all</label>
+                                <label class="option"><input type="radio" name="q1" value="1"><span class="radio-custom"></span> Several days</label>
+                                <label class="option"><input type="radio" name="q1" value="2"><span class="radio-custom"></span> More than half the days</label>
+                                <label class="option"><input type="radio" name="q1" value="3"><span class="radio-custom"></span> Nearly every day</label>
+                            </div>
+                        </div>
+
+                        <div class="question" id="question2">
+                            <p class="question-text"><strong>Q2.</strong> How often have you felt down, sad, or hopeless recently?</p>
+                            <div class="options">
+                                <label class="option"><input type="radio" name="q2" value="0" required><span class="radio-custom"></span> Not at all</label>
+                                <label class="option"><input type="radio" name="q2" value="1"><span class="radio-custom"></span> Several days</label>
+                                <label class="option"><input type="radio" name="q2" value="2"><span class="radio-custom"></span> More than half the days</label>
+                                <label class="option"><input type="radio" name="q2" value="3"><span class="radio-custom"></span> Nearly every day</label>
+                            </div>
+                        </div>
+
+                        <div class="question" id="question3">
+                            <p class="question-text"><strong>Q3.</strong> How often have you experienced low energy or fatigue, even without heavy physical activity?</p>
+                            <div class="options">
+                                <label class="option"><input type="radio" name="q3" value="0" required><span class="radio-custom"></span> Not at all</label>
+                                <label class="option"><input type="radio" name="q3" value="1"><span class="radio-custom"></span> Several days</label>
+                                <label class="option"><input type="radio" name="q3" value="2"><span class="radio-custom"></span> More than half the days</label>
+                                <label class="option"><input type="radio" name="q3" value="3"><span class="radio-custom"></span> Nearly every day</label>
+                            </div>
+                        </div>
+
+                        <div class="question" id="question4">
+                            <p class="question-text"><strong>Q4.</strong> How often have you felt nervous, anxious, or on edge?</p>
+                            <div class="options">
+                                <label class="option"><input type="radio" name="q4" value="0" required><span class="radio-custom"></span> Not at all</label>
+                                <label class="option"><input type="radio" name="q4" value="1"><span class="radio-custom"></span> Several days</label>
+                                <label class="option"><input type="radio" name="q4" value="2"><span class="radio-custom"></span> More than half the days</label>
+                                <label class="option"><input type="radio" name="q4" value="3"><span class="radio-custom"></span> Nearly every day</label>
+                            </div>
+                        </div>
+
+                        <div class="question" id="question5">
+                            <p class="question-text"><strong>Q5.</strong> How often have you found it difficult to control worrying thoughts?</p>
+                            <div class="options">
+                                <label class="option"><input type="radio" name="q5" value="0" required><span class="radio-custom"></span> Not at all</label>
+                                <label class="option"><input type="radio" name="q5" value="1"><span class="radio-custom"></span> Several days</label>
+                                <label class="option"><input type="radio" name="q5" value="2"><span class="radio-custom"></span> More than half the days</label>
+                                <label class="option"><input type="radio" name="q5" value="3"><span class="radio-custom"></span> Nearly every day</label>
+                            </div>
+                        </div>
+
+                        <div class="question" id="question6">
+                            <p class="question-text"><strong>Q6.</strong> How often have you felt restless or unable to relax?</p>
+                            <div class="options">
+                                <label class="option"><input type="radio" name="q6" value="0" required><span class="radio-custom"></span> Not at all</label>
+                                <label class="option"><input type="radio" name="q6" value="1"><span class="radio-custom"></span> Several days</label>
+                                <label class="option"><input type="radio" name="q6" value="2"><span class="radio-custom"></span> More than half the days</label>
+                                <label class="option"><input type="radio" name="q6" value="3"><span class="radio-custom"></span> Nearly every day</label>
+                            </div>
+                        </div>
+
+                        <div class="question" id="question7">
+                            <p class="question-text"><strong>Q7.</strong> How often have you felt overwhelmed by responsibilities or daily tasks?</p>
+                            <div class="options">
+                                <label class="option"><input type="radio" name="q7" value="0" required><span class="radio-custom"></span> Not at all</label>
+                                <label class="option"><input type="radio" name="q7" value="1"><span class="radio-custom"></span> Several days</label>
+                                <label class="option"><input type="radio" name="q7" value="2"><span class="radio-custom"></span> More than half the days</label>
+                                <label class="option"><input type="radio" name="q7" value="3"><span class="radio-custom"></span> Nearly every day</label>
+                            </div>
+                        </div>
+
+                        <div class="question" id="question8">
+                            <p class="question-text"><strong>Q8.</strong> How often have you found it hard to relax or calm your mind?</p>
+                            <div class="options">
+                                <label class="option"><input type="radio" name="q8" value="0" required><span class="radio-custom"></span> Not at all</label>
+                                <label class="option"><input type="radio" name="q8" value="1"><span class="radio-custom"></span> Several days</label>
+                                <label class="option"><input type="radio" name="q8" value="2"><span class="radio-custom"></span> More than half the days</label>
+                                <label class="option"><input type="radio" name="q8" value="3"><span class="radio-custom"></span> Nearly every day</label>
+                            </div>
+                        </div>
+
+                        <div class="question" id="question9">
+                            <p class="question-text"><strong>Q9.</strong> How often have you felt irritable or easily frustrated with people or situations?</p>
+                            <div class="options">
+                                <label class="option"><input type="radio" name="q9" value="0" required><span class="radio-custom"></span> Not at all</label>
+                                <label class="option"><input type="radio" name="q9" value="1"><span class="radio-custom"></span> Several days</label>
+                                <label class="option"><input type="radio" name="q9" value="2"><span class="radio-custom"></span> More than half the days</label>
+                                <label class="option"><input type="radio" name="q9" value="3"><span class="radio-custom"></span> Nearly every day</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-nav">
+                        <button type="button" class="btn-next" onclick="nextStep(2)">Next: How You Feel</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Text Input -->
+                <div class="form-step" id="step2">
+                    <h3>Part 2: Express How You're Feeling</h3>
+                    <p class="step-description">Please describe how you are feeling right now in about 100 words. Be as honest as you can.</p>
+
+                    <div class="text-input-area">
+                        <textarea name="user_text" id="userText" rows="6" maxlength="700"
+                            placeholder="Share how you're feeling today... What's on your mind? How has your mood been? Are there things that have been bothering you or making you happy?"></textarea>
+                        <div class="char-count"><span id="charCount">0</span> / 700 characters</div>
+                    </div>
+
+                    <div class="form-nav">
+                        <button type="button" class="btn-prev" onclick="prevStep(1)">Back</button>
+                        <button type="button" class="btn-next" onclick="nextStep(3)">Next: Voice Sample</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Audio Upload -->
+                <div class="form-step" id="step3">
+                    <h3>Part 3: Voice Sample</h3>
+                    <p class="step-description">Upload an audio recording of yourself speaking. This helps us analyze speech patterns. (Supported: .wav, .mp3, .ogg, .flac)</p>
+
+                    <div class="upload-area" id="audioUploadArea">
+                        <div class="upload-icon">&#127908;</div>
+                        <p>Drag & drop your audio file here or click to browse</p>
+                        <input type="file" name="audio_file" id="audioFile" accept=".wav,.mp3,.ogg,.flac" hidden>
+                        <button type="button" class="btn-upload" onclick="document.getElementById('audioFile').click()">Choose Audio File</button>
+                        <p class="file-name" id="audioFileName"></p>
+                    </div>
+
+                    <div class="form-nav">
+                        <button type="button" class="btn-prev" onclick="prevStep(2)">Back</button>
+                        <button type="button" class="btn-next" onclick="nextStep(4)">Next: Photo</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Image Upload -->
+                <div class="form-step" id="step4">
+                    <h3>Part 4: Facial Photo</h3>
+                    <p class="step-description">Upload a clear photo of your face (.jpg or .png). This is used for facial expression analysis.</p>
+
+                    <div class="upload-area" id="imageUploadArea">
+                        <div class="upload-icon">&#128247;</div>
+                        <p>Drag & drop your photo here or click to browse</p>
+                        <input type="file" name="image_file" id="imageFile" accept=".jpg,.jpeg,.png" hidden>
+                        <button type="button" class="btn-upload" onclick="document.getElementById('imageFile').click()">Choose Image File</button>
+                        <p class="file-name" id="imageFileName"></p>
+                        <div class="image-preview" id="imagePreview"></div>
+                    </div>
+
+                    <div class="form-nav">
+                        <button type="button" class="btn-prev" onclick="prevStep(3)">Back</button>
+                        <button type="submit" class="btn-submit" id="submitBtn">Analyze Now</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Loading Overlay -->
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="spinner"></div>
+                <p>Analyzing your data...</p>
+                <p class="loading-sub">Processing questionnaire, text, speech, and facial features</p>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection" style="display:none;">
+                <h2>Your Assessment Results</h2>
+
+                <div class="disclaimer">
+                    <strong>Disclaimer:</strong> This tool is for educational and screening purposes only. It is NOT a clinical diagnosis. Please consult a licensed mental health professional for proper evaluation.
+                </div>
+
+                <!-- Overall Risk -->
+                <div class="result-card risk-card" id="riskCard">
+                    <h3>Overall Risk Level</h3>
+                    <div class="risk-badge" id="riskBadge"></div>
+                </div>
+
+                <!-- Score Cards -->
+                <div class="scores-grid">
+                    <div class="score-card">
+                        <h4>Depression</h4>
+                        <div class="score-circle" id="depScore">0</div>
+                        <p class="score-max">/ 36</p>
+                    </div>
+                    <div class="score-card">
+                        <h4>Anxiety</h4>
+                        <div class="score-circle" id="anxScore">0</div>
+                        <p class="score-max">/ 36</p>
+                    </div>
+                    <div class="score-card">
+                        <h4>Stress</h4>
+                        <div class="score-circle" id="stressScore">0</div>
+                        <p class="score-max">/ 36</p>
+                    </div>
+                </div>
+
+                <!-- Text Analysis -->
+                <div class="result-card">
+                    <h3>Text Sentiment Analysis</h3>
+                    <div class="analysis-grid" id="textResults"></div>
+                </div>
+
+                <!-- Audio Features -->
+                <div class="result-card">
+                    <h3>Speech Analysis</h3>
+                    <div class="analysis-grid" id="audioResults"></div>
+                </div>
+
+                <!-- Image Features -->
+                <div class="result-card">
+                    <h3>Facial Analysis</h3>
+                    <div class="analysis-grid" id="imageResults"></div>
+                </div>
+
+                <!-- ML Prediction -->
+                <div class="result-card" id="mlCard" style="display:none;">
+                    <h3>ML Model Prediction</h3>
+                    <div class="analysis-grid" id="mlResults"></div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="result-card recommendations-card">
+                    <h3>Recommendations</h3>
+                    <ul id="recommendationsList"></ul>
+                </div>
+
+                <!-- Helpline -->
+                <div class="helpline-card">
+                    <h3>Need Immediate Help?</h3>
+                    <p>If you or someone you know is struggling, please reach out:</p>
+                    <p><strong>iCall:</strong> 9152987821</p>
+                    <p><strong>Vandrevala Foundation:</strong> 1860-2662-345</p>
+                    <p><strong>NIMHANS:</strong> 080-46110007</p>
+                </div>
+
+                <button type="button" class="btn-primary" onclick="resetForm()" style="margin-top:2rem;">Take Assessment Again</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 MindReflectAI. Sentiment Predictor for Depression and Stress Detection.</p>
+            <p class="footer-sub">This tool is for educational purposes only and is not a substitute for professional medical advice.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

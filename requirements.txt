@@ -1,0 +1,8 @@
+flask
+numpy
+librosa
+opencv-python
+joblib
+textblob
+scikit-learn
+werkzeug
